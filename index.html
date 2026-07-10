@@ -1067,12 +1067,10 @@
   const fullMessage = "Привіт! ❤️ Запрошую тебе сьогодні, завтра і післязавтра на перегляд шоу, а після — на спільний перегляд усіх репостів. Якщо маєш час та бажання, і не інших планів. Час початку обираєш ти — коли тобі буде максимально зручно та комфортно. Просто натисни кнопку нижче, і я поділюся з тобою посиланням.🥰";
   const messageEl = document.getElementById('message');
   const words = fullMessage.split(' ');
-  const wordBaseDelay = 2.55; // seconds, timed with the envelope reveal
   words.forEach((word, i) => {
     const span = document.createElement('span');
     span.className = 'word';
     span.textContent = word + (i < words.length - 1 ? '\u00A0' : '');
-    span.style.animationDelay = (wordBaseDelay + i * 0.028) + 's';
     messageEl.appendChild(span);
   });
 
@@ -1124,6 +1122,11 @@
     // Show the card with invitation
     setTimeout(() => {
       card.classList.add('visible');
+      // Start word-by-word animation
+      const wordElements = document.querySelectorAll('.message .word');
+      wordElements.forEach((word, i) => {
+        word.style.animationDelay = (i * 0.05) + 's';
+      });
     }, 3100);
   });
 
